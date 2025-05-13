@@ -6,7 +6,8 @@ CS-GY 6313 / CUSP-GX 6006: Data Visualization Final Project
 
 The New York Food Atlas around Subways is an interactive web application that visualizes the relationship between NYC subway stations and their surrounding food environments. This project explores how transportation infrastructure shapes the urban food landscape by examining patterns of restaurant distribution, cuisine diversity, and price accessibility around subway stations.
 
-![Project Screenshot](images/project-screenshot.png)
+![Map View](images/1.png)
+![Map View](images/1-2.png)
 
 ## Features
 
