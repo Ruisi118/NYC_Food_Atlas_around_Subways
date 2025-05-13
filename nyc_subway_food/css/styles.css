@@ -1,0 +1,694 @@
+/* Basic style reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    font-family: 'Arial', 'Microsoft YaHei', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* Main container */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header navigation bar */
+.app-header {
+    background-color: #d81159;
+    color: white;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000; /* Ensure the navigation bar is on top */
+}
+
+.app-header h1 {
+    margin-bottom: 0;
+    font-size: 1.8rem;
+}
+
+.tab-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tab-button {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    padding: 0.5rem 1rem;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.tab-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.tab-button.active {
+    background: rgba(255, 255, 255, 0.4);
+    font-weight: bold;
+}
+
+/* Main content area */
+.app-content {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
+
+.content-tab {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.content-tab.active {
+    display: flex;
+    z-index: 1;
+}
+
+/* Map view */
+#map-tab {
+    display: flex;
+    flex-direction: row;
+    height: calc(100vh - 80px);
+}
+
+.sidebar {
+    width: 320px; 
+    background: #f5f5f5;
+    padding: 1rem;
+    overflow-y: auto;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    z-index: 10;
+}
+
+#map-container {
+    flex: 1;
+    min-height: 500px;
+}
+
+/* Filter styles */
+.filter-section {
+    margin-bottom: 2rem;
+}
+
+.filter-section h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.filter-group {
+    margin-bottom: 1.2rem;
+}
+
+.filter-group h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+}
+
+/* Price button styles */
+.price-buttons {
+    display: flex;
+    width: 100%;
+}
+
+.price-button {
+    flex: 1;
+    padding: 0.5rem 0.3rem; 
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+}
+
+.price-button:first-child {
+    border-radius: 4px 0 0 4px;
+}
+
+.price-button:last-child {
+    border-radius: 0 4px 4px 0;
+}
+
+.price-button.active {
+    background: #d81159;
+    color: white;
+    border-color: #d81159;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    background: #d81159;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: #bb0d4f;
+}
+
+/* Information panel */
+.station-info {
+    margin-top: 1rem;
+    background: white;
+    border-radius: 4px;
+    padding: 1rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.station-info h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.station-details {
+    font-size: 14px;
+}
+
+.station-details p {
+    margin: 5px 0;
+}
+
+.station-details hr {
+    margin: 10px 0;
+    border: none;
+    border-top: 1px solid #eee;
+}
+
+.price-distribution {
+    margin-top: 8px;
+}
+
+.price-bar {
+    display: flex;
+    height: 20px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.price-segment {
+    height: 100%;
+}
+
+.price-legend {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #666;
+    margin-top: 2px;
+}
+
+.price-legend span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Data analysis view - improved chart layout */
+#data-tab {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 80px);
+    overflow: auto;
+}
+
+/* Redesigned chart container layout - increased row spacing */
+/* Improved chart layout - increased row spacing */
+.charts-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    grid-template-rows: repeat(2, 330px);  /* Reduced each chart's height to accommodate larger spacing */
+    gap: 20px;                             /* Default column spacing */
+    row-gap: 140px;                        /* Increased row spacing to 140px */
+    width: 100%;
+    padding-bottom: 20px;
+    padding-top: 10px;                     /* Added top padding */
+}
+
+.chart-card {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+.chart-card h3 {
+    margin: 0 0 10px 0;
+    padding-bottom: 10px;
+    font-size: 1rem;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    flex: 0 0 auto;
+}
+
+/* Chart canvas container used to enforce appropriate sizing */
+.chart-container {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* Adjust canvas to fit container */
+.chart-card canvas {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* Add responsive adjustments */
+@media (max-width: 1024px) {
+    .charts-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, 300px);
+        row-gap: 80px;  /* Row spacing on smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .charts-container {
+        row-gap: 60px;  /* Row spacing on mobile devices */
+    }
+}
+
+/* Commuter food view */
+#commuter-tab {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 80px);
+}
+
+.commuter-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.commuter-input {
+    background: white;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.route-selector {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.station-selector {
+    flex: 1;
+}
+
+.commuter-results {
+    flex: 1;
+    display: flex;
+    gap: 1rem;
+    overflow: hidden;
+}
+
+#commuter-map {
+    flex: 2;
+    background: #e9e9e9;
+    border-radius: 4px;
+    min-height: 400px;
+}
+
+.food-recommendations {
+    flex: 1;
+    background: white;
+    border-radius: 4px;
+    padding: 1rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    overflow-y: auto;
+    max-width: 35%;  /* Limit width to make more space for the map */
+}
+
+/* Restaurant details */
+.restaurant-popup h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.restaurant-popup p {
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
+}
+
+/* Diversity rankings popup */
+.diversity-rankings-popup .leaflet-popup-content {
+    width: 400px !important;
+}
+
+.diversity-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.diversity-table th, .diversity-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 0.9rem;
+}
+
+.diversity-table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+.station-row {
+    cursor: pointer;
+}
+
+.station-row:hover {
+    background-color: #f1f8e9;
+}
+
+.popup-note {
+    margin-top: 10px;
+    font-style: italic;
+    font-size: 12px;
+    color: #666;
+}
+
+/* Error notification */
+.error-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #f44336;
+    color: white;
+    padding: 1rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    z-index: 9999;
+    max-width: 300px;
+}
+
+.error-content h3 {
+    margin-bottom: 0.5rem;
+}
+
+.close-btn {
+    margin-top: 0.5rem;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* Improved map marker styles - thinner borders and lighter shadows */
+.station-marker {
+    background: transparent;
+    border: none;
+}
+
+
+/* Map View station icon styles - thinner borders and lighter shadows */
+.station-marker .station-icon {
+    border: 2.5px solid white !important;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2) !important;
+    transition: transform 0.2s;
+}
+
+.station-marker:hover .station-icon {
+    transform: scale(1.2);
+}
+
+.restaurant-marker {
+    background: transparent;
+    border: none;
+}
+
+.restaurant-marker .restaurant-icon {
+    opacity: 0.9;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+.restaurant-marker:hover .restaurant-icon {
+    opacity: 1;
+    transform: scale(1.5);
+}
+
+/* Make subway lines more visible */
+.leaflet-overlay-pane path {
+    stroke-opacity: 0.8;
+    stroke-width: 3.5px;
+}
+
+/* Food item styles */
+.food-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.food-item:hover {
+    background-color: #f5f5f5;
+}
+
+.food-item h4 {
+    margin: 0 0 5px 0;
+    color: #d81159;
+}
+
+.food-details {
+    font-size: 14px;
+}
+
+.food-details p {
+    margin: 3px 0;
+}
+
+.empty-message {
+    color: #666;
+    font-style: italic;
+    padding: 10px 0;
+}
+
+/* Custom dropdown styles */
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+    padding-right: 30px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+select:focus {
+    outline: none;
+    border-color: #d81159;
+    box-shadow: 0 0 0 2px rgba(216, 17, 89, 0.2);
+}
+
+/* Improved food recommendation area */
+.food-recommendations h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.food-list {
+    max-height: calc(100% - 50px);
+    overflow-y: auto;
+}
+
+/* Commuter View specific styles */
+/* Target only subway lines but not routes */
+#commuter-map .leaflet-overlay-pane path:not(.route-path) {
+    stroke-width: 1.5px !important;
+    stroke-opacity: 0.8 !important;
+}
+
+/* Style specifically for route paths */
+#commuter-map .route-path {
+    stroke-width: 3.5px !important;  /* Much thicker for routes */
+    stroke-opacity: 1 !important;
+    stroke-linecap: round !important;
+    stroke-linejoin: round !important;
+}
+
+/* Make sure subway lines stay in background */
+#commuter-map .leaflet-tile-pane {
+    z-index: 100;
+}
+/* Route station marker styles - thinner borders and lighter shadows */
+.route-station-marker div {
+    border: 2.5px solid white !important;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2) !important;
+    transition: transform 0.2s;
+}
+
+.route-station-marker:hover div {
+    transform: scale(1.2);
+}
+
+/* Recommended restaurant marker styles */
+.recommended-restaurant-marker div {
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+.recommended-restaurant-marker:hover div {
+    opacity: 1;
+    transform: scale(1.5);
+}
+
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+    .charts-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, 350px);
+        row-gap: 30px;  /* Row spacing on smaller screens */
+    }
+    
+    .chart-card {
+        min-height: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    #map-tab {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+        max-height: 300px;
+    }
+    
+    .station-selectors, .route-selector {
+        flex-direction: column;
+    }
+    
+    .commuter-results {
+        flex-direction: column;
+    }
+    
+    .food-recommendations {
+        max-width: 100%;
+        margin-top: 1rem;
+    }
+    
+    .app-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .tab-controls {
+        margin-top: 0.5rem;
+        width: 100%;
+    }
+    
+    .diversity-rankings-popup .leaflet-popup-content {
+        width: 300px !important;
+    }
+    
+    .charts-container {
+        grid-template-rows: repeat(4, 300px);
+        row-gap: 25px;  /* Row spacing on mobile devices */
+    }
+}
+
+/* Scrollbar style enhancement */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #d3d3d3;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+}
+
+/* Loading animation */
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.loading-spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top: 4px solid #d81159;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

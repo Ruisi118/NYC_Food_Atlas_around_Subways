@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New York Food Atlas around Subways</title>
+    
+    <!-- Import Leaflet map library -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    
+    <!-- Import Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header bar -->
+        <header class="app-header">
+            <h1>New York Food Atlas around Subways</h1>
+            <div class="tab-controls">
+                <button class="tab-button active" data-tab="map">Map View</button>
+                <button class="tab-button" data-tab="data">Data Analysis</button>
+                <button class="tab-button" data-tab="commuter">Commuter Food</button>
+            </div>
+        </header>
+        
+        <!-- Main content area -->
+        <main class="app-content">
+            <!-- Map View -->
+            <div class="content-tab active" id="map-tab">
+                <div class="sidebar">
+                    <div class="filter-section">
+                        <h2>Filter Option</h2>
+                        
+                        <!-- Subway line filter -->
+                        <div class="filter-group">
+                            <h3>Subway line</h3>
+                            <select id="subway-line-filter">
+                                <option value="all">All Lines</option>
+                                <!-- Dynamic subway line options will be added here -->
+                            </select>
+                        </div>
+                        
+                        <!-- Food type filter -->
+                        <div class="filter-group">
+                            <h3>Food Type</h3>
+                            <select id="cuisine-filter">
+                                <option value="all">All Types</option>
+                                <!-- Dynamic cuisine options will be added here -->
+                            </select>
+                        </div>
+                        
+                        <!-- Price filter -->
+                        <div class="filter-group">
+                            <h3>Price Range</h3>
+                            <div class="price-buttons">
+                                <button class="price-button active" data-price="all">All</button>
+                                <button class="price-button" data-price="1">$</button>
+                                <button class="price-button" data-price="2">$$</button>
+                                <button class="price-button" data-price="3">$$$</button>
+                                <button class="price-button" data-price="4">$$$$</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Diversity ranking -->
+                        <div class="filter-group">
+                            <h3>Food Diversity</h3>
+                            <button id="diversity-rank-btn">Show the Most Diverse Station</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Station info panel -->
+                    <div class="station-info">
+                        <h3>Station Information</h3>
+                        <div id="station-info-content">
+                            <p>Click on a station on the map to view detailed information</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Map container -->
+                <div id="map-container"></div>
+            </div>
+            
+            <!-- Data Analysis View with improved chart structure -->
+            <div class="content-tab" id="data-tab" style="display: none;">
+                <div class="charts-container">
+                    <div class="chart-card">
+                        <h3>TOP 10 Food Diversity Stations</h3>
+                        <div class="chart-container">
+                            <canvas id="diversity-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Restaurant Distribution by Borough</h3>
+                        <div class="chart-container">
+                            <canvas id="borough-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Cuisine Distribution</h3>
+                        <div class="chart-container">
+                            <canvas id="cuisine-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Price Distribution</h3>
+                        <div class="chart-container">
+                            <canvas id="price-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Commuter Food View -->
+            <div class="content-tab" id="commuter-tab" style="display: none;">
+                <div class="commuter-container">
+                    <div class="commuter-input">
+                        <h3>Commuter Food Planning</h3>
+                        <div class="route-selector">
+                            <div class="station-selector">
+                                <label for="start-station">Departure Station</label>
+                                <select id="start-station">
+                                    <option value="">-- Select Departure --</option>
+                                    <!-- Dynamic station options will be added here -->
+                                </select>
+                            </div>
+                            <div class="station-selector">
+                                <label for="end-station">Destination Station</label>
+                                <select id="end-station">
+                                    <option value="">-- Select Destination --</option>
+                                    <!-- Dynamic station options will be added here -->
+                                </select>
+                            </div>
+                        </div>
+                        <button id="find-food-btn">Find Food</button>
+                    </div>
+                    
+                    <div class="commuter-results">
+                        <div id="commuter-map"></div>
+                        <div class="food-recommendations">
+                            <h3>Recommended Restaurants</h3>
+                            <div id="food-list"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Load JavaScript files -->
+    <script src="js/main.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/commuter.js"></script>
+</body>
+</html>
